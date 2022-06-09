@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Chatter.Services;
+using FireSharp;
+using FireSharp.Config;
+using FireSharp.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +27,12 @@ namespace Chatter
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IFirebaseConfig config = new FirebaseConfig
+            {
+                BasePath = "https://chatter-49673-default-rtdb.europe-west1.firebasedatabase.app/"
+            };
+            services.AddSingleton<IFirebaseClient>(new FirebaseClient(config));
+            services.AddScoped<UserService>();
             services.AddControllersWithViews();
         }
 

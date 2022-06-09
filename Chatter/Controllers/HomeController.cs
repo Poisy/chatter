@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Chatter.Models;
+using Chatter.Services;
 
 namespace Chatter.Controllers
 {
@@ -13,13 +14,18 @@ namespace Chatter.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public UserService UserService { get; set; }
+
+        public HomeController(ILogger<HomeController> logger, UserService userService)
         {
             _logger = logger;
+            UserService = userService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            User user = new User{FirstName = "John", LastName = "asds"};
+            await UserService.SetUser(user);
             return View();
         }
 
