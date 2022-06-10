@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Chatter.Services;
-using FireSharp;
-using FireSharp.Config;
-using FireSharp.Interfaces;
+using Google.Cloud.Firestore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,12 +25,14 @@ namespace Chatter
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IFirebaseConfig config = new FirebaseConfig
-            {
-                BasePath = "https://chatter-49673-default-rtdb.europe-west1.firebasedatabase.app/"
-            };
-            services.AddSingleton<IFirebaseClient>(new FirebaseClient(config));
+            // Configurations
+            string firestoreKeyPath = AppDomain.CurrentDomain.BaseDirectory + Configuration["Firebase:EnvironmentVariables:GOOGLE_APPLICATION_CREDENTIALS"];
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", firestoreKeyPath);
+
+            // Addings services to DI container
+            services.AddSingleton<FirestoreDb>(FirestoreDb.Create(Configuration["Firebase:ProjectId"]));
             services.AddScoped<UserService>();
+            
             services.AddControllersWithViews();
         }
 

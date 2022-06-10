@@ -1,31 +1,30 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Chatter.Models;
-using FireSharp;
-using FireSharp.Interfaces;
-using FireSharp.Response;
+using Google.Cloud.Firestore;
 
 namespace Chatter.Services
 {
     public class UserService
     {
+        #region Properties and fields
+        private readonly FirestoreDb _db;
+        #endregion
 
-        public UserService(IFirebaseClient client)
+
+        public UserService(FirestoreDb db)
         {
-            Client = client;
+            _db = db;
         }
 
-        private IFirebaseClient Client { get; set; }
-        public async Task<User> SetUser(User user)
+
+        #region Methods
+        public async Task AddUser(User user)
         {
-            PushResponse response = await Client.PushAsync("users", user);
-            User result = response.ResultAs<User>(); //The response will contain the data written
-            return result;
+            CollectionReference collection = _db.Collection("users");
+            DocumentReference document = await collection.AddAsync(new { FirstName = user.FirstName, LastName = user.LastName });
         }
-        public async Task<User> UpdateUser(User user)
-        {
-            FirebaseResponse response = await Client.UpdateAsync("users", user);
-            User result = response.ResultAs<User>(); //The response will contain the data written
-            return result;
-        }
+        #endregion
     }
 }

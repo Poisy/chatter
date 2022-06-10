@@ -76,3 +76,6 @@ _[Ss]cripts
 
 # Custom
 .vscode
+appsettings.json
+appsettings.Development.json
+chatter-49673-firebase-adminsdk-zq782-fdac5d1929.json

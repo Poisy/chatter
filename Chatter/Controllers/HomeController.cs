@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Chatter.Models;
 using Chatter.Services;
+using Google.Cloud.Firestore;
 
 namespace Chatter.Controllers
 {
@@ -14,30 +15,25 @@ namespace Chatter.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public UserService UserService { get; set; }
+        private readonly UserService _userService;
 
         public HomeController(ILogger<HomeController> logger, UserService userService)
         {
             _logger = logger;
-            UserService = userService;
+            _userService = userService;
         }
 
         public async Task<IActionResult> Index()
         {
-            User user = new User{FirstName = "John", LastName = "asds"};
-            await UserService.SetUser(user);
-            return View();
-        }
+            await _userService.AddUser(
+                new User
+                {   
+                    FirstName = "Iop", 
+                    LastName = "123123"
+                }
+            );
 
-        public IActionResult Privacy()
-        {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
