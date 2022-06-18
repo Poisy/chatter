@@ -25,15 +25,15 @@ namespace Chatter.Controllers
 
         public async Task<IActionResult> Index()
         {
-            await _userService.AddUser(
-                new User
-                {   
-                    FirstName = "Iop", 
-                    LastName = "123123"
-                }
-            );
+            // await _userService.AddUser(
+            //     new User
+            //     {   
+            //         FirstName = "Iop", 
+            //         LastName = "123123"
+            //     }
+            // );
 
-            return View();
+            return View("Register");
         }
     }
 }
