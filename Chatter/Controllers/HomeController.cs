@@ -33,7 +33,7 @@ namespace Chatter.Controllers
             //     }
             // );
 
-            return View("Register");
+            return View();
         }
     }
 }

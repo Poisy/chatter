@@ -1,18 +1,101 @@
-﻿@{
-    
-}
+﻿<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#register">
+    SignUp
+</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login">
+    SignIn
+</button>
 
+<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerlabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="">
+                <div class="modal-body">
+                    <div class="container color-bg">
+                        <div class="row">
+                            <div class="col pt-5">
+                                <h3 class="text-center color-text">Sign Up</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col p-5">
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label class="text-center color-text" for="">Email</label>
+                                        <input class="form-control" type="email" id="" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label class="text-center color-text" for="">Username</label>
+                                        <input class="form-control" type="text" id="" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label class="text-center color-text" for="">Password</label>
+                                        <input class="form-control" type="password" id="" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label class="text-center color-text" for="">Confirm Password</label>
+                                        <input class="form-control" type="password" id=""
+                                            placeholder="Confirm Password">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <p class="text-center">One of three columns</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#login">
+                        Have Account ?
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Create Account</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="col">
-      <p class="text-center">One of three columns</p>
+</div>
+
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginlabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="">
+                <div class="modal-body">
+                    <div class="container color-bg">
+                        <div class="row">
+                            <div class="col pt-5">
+                                <h3 class="text-center color-text">Sign In</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col p-5">
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label class="text-center color-text" for="">Email</label>
+                                        <input class="form-control" type="email" id="" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <label class="text-center color-text" for="">Password</label>
+                                        <input class="form-control" type="password" id="" placeholder="Password">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#register">
+                        Don't Have Account ?
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="col">
-      <p class="text-center">One of three columns</p>
-    </div>
-  </div>
 </div>
