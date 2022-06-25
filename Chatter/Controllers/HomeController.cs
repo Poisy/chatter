@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,15 +14,45 @@ namespace Chatter.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
         private readonly UserService _userService;
 
-        public HomeController(ILogger<HomeController> logger, UserService userService)
+        public HomeController(UserService userService)
         {
-            _logger = logger;
             _userService = userService;
         }
+
+        // Register
+        public async Task<IActionResult> Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.Password == model.ConfirmPassword)
+                {
+                    FirestoreUserModel user = await _userService.GetUser(model.Email);
+                    
+                    if (user == null)
+                    {
+                        Console.WriteLine("sus");
+                        // Register the user
+                        await _userService.AddUser(model);
+                        return View("Index", model);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Email", $"The Email '{model.Email}' is already taken!");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("ConfirmPassword", "Passwords do not match!");
+                }
+            }
+            
+            // Incorrect model
+            return View("Index", model);
+        }
+
+        // Login
 
         public async Task<IActionResult> Index()
         {

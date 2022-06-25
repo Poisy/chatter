@@ -1,14 +1,17 @@
-﻿<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#register">
+﻿@model Chatter.Models.RegisterModel
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#register">
     SignUp
 </button>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login">
     SignIn
 </button>
 
+<p>@(Model == null ? "No User" : Model.Email)</p>
+
 <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerlabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="">
+            <form asp-action="Register" runat="server">
                 <div class="modal-body">
                     <div class="container color-bg">
                         <div class="row">
@@ -17,49 +20,51 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div asp-validation-summary="ModelOnly"></div>
                             <div class="col p-5">
                                 <div class="row">
                                     <div class="col form-group">
-                                        <label class="text-center color-text" for="">Email</label>
-                                        <input class="form-control" type="email" id="" placeholder="Email">
+                                        <label asp-for="Email" class="text-center color-text"></label>
+                                        <input asp-for="Email" type="email" class="form-control" placeholder="Email"/>
+                                        <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col form-group">
-                                        <label class="text-center color-text" for="">Username</label>
-                                        <input class="form-control" type="text" id="" placeholder="Username">
+                                        <label asp-for="Username" class="text-center color-text"></label>
+                                        <input asp-for="Username" class="form-control" type="text" placeholder="Username">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col form-group">
-                                        <label class="text-center color-text" for="">Password</label>
-                                        <input class="form-control" type="password" id="" placeholder="Password">
+                                        <label asp-for="Password" class="text-center color-text"></label>
+                                        <input asp-for="Password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="The password has to be at least 5 characters with at least 1 Upper Case character, 1 lower case character and 1 Number!" class="form-control" placeholder="Password" required>
+                                        <span asp-validation-for="Password" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col form-group">
-                                        <label class="text-center color-text" for="">Confirm Password</label>
-                                        <input class="form-control" type="password" id=""
-                                            placeholder="Confirm Password">
+                                        <label asp-for="ConfirmPassword" class="text-center color-text"></label>
+                                        <input asp-for="ConfirmPassword" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="The password has to be at least 5 characters with at least 1 Upper Case character, 1 lower case character and 1 Number!" class="form-control" placeholder="Confirm Password" required>
+                                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#login">
                         Have Account ?
                     </button>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Create Account</button>
+                    <button type="submit" asp-controller="Home" asp-action="Register" class="btn btn-primary btn-lg btn-block">Create Account</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginlabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginlabel" aria-hidden="tr ue" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form action="">
